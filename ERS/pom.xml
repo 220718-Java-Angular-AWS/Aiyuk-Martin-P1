@@ -7,6 +7,7 @@
     <groupId>com.revatureERS</groupId>
     <artifactId>EmployeeReimbursementSystem</artifactId>
     <version>1.0</version>
+    <packaging>war</packaging>
 
     <properties>
         <maven.compiler.source>18</maven.compiler.source>
@@ -14,12 +15,14 @@
     </properties>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.4.0</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
         </dependency>
+
     </dependencies>
+
 
 </project>

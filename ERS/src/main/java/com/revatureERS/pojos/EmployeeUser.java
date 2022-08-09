@@ -24,6 +24,14 @@ public class EmployeeUser {
         this.AccountBalance = accountBalance;
     }
 
+    public EmployeeUser(String username, String email, String password, String department) {
+        //this.userId = null;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.department = department;
+    }
+
 
     public int getUserId() {
         return userId;

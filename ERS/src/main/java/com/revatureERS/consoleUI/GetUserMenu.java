@@ -1,4 +1,4 @@
 package com.revatureERS.consoleUI;
 
-public class ViewManager {
+public class GetUserMenu {
 }
