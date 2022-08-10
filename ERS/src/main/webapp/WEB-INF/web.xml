@@ -15,15 +15,36 @@
         <listener-class>com.revatureERS.servlets.DependencyLoaderListener</listener-class>
     </listener>
 
-    <servlet>
-        <servlet-name>pingServlet</servlet-name>
-        <servlet-class>com.revatureERS.servlets.PingServlet</servlet-class>
-    </servlet>
-
 
     <servlet-mapping>
-        <servlet-name>pingServlet</servlet-name>
-        <url-pattern>/ping</url-pattern>
+        <servlet-name>checkServlet</servlet-name>
+        <url-pattern>/check</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>checkServlet</servlet-name>
+        <servlet-class>com.revatureERS.servlets.CheckServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EmployeeUserServlet</servlet-name>
+        <url-pattern>/EmployeeUser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EmployeeUserServlet</servlet-name>
+        <servlet-class>com.revatureERS.servlets.EmployeeUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ReimbursementServlet</servlet-name>
+        <url-pattern>/Reimbursement</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ReimbursementServlet</servlet-name>
+        <servlet-class>com.revatureERS.servlets.ReimbursementServlet</servlet-class>
+    </servlet>
+
 
 </web-app>

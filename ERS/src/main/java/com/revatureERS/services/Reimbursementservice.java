@@ -9,7 +9,7 @@ public class Reimbursementservice {
 
     private ReimbursementDAO dao;
 
-    public Reimbursementservice(ReimbursementDAO dao) {
+    public Reimbursementservice() {
         this.dao = new ReimbursementDAO();
     }
 
