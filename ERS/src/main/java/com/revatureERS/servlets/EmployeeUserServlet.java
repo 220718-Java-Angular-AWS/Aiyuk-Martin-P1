@@ -47,13 +47,13 @@ public class EmployeeUserServlet extends HttpServlet {
         resp.setContentType("Application/Json; Charset=UTF-8");
         resp.setStatus(200);
 
-       // Use this method to get all Users
-        List<EmployeeUser> userList = service.getAllEmployeeUsers();
-        String json = mapper.writeValueAsString(userList);
-        resp.getWriter().println(json);
-        resp.setStatus(200);
-        resp.setContentType("Application/Json; Charset=UTF-8");
-        resp.setStatus(200);
+//       // Use this method to get all Users
+//        List<EmployeeUser> userList = service.getAllEmployeeUsers();
+//        String json = mapper.writeValueAsString(userList);
+//        resp.getWriter().println(json);
+//        resp.setStatus(200);
+//        resp.setContentType("Application/Json; Charset=UTF-8");
+//        resp.setStatus(200);
     }
 
     @Override

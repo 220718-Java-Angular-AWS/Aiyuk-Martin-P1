@@ -38,6 +38,29 @@ public class EmployeeUserDAO implements DatasourceCRUD<EmployeeUser>{
 
     }
 
+    public EmployeeUser logIn(String email, String password) {
+        EmployeeUser user = new EmployeeUser();
+        try {
+            String sql = "SELECT * FROM EmployeeUsers WHERE email = ? AND password = ?";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setString(1, email);
+            pstmt.setString(2, password);
+            ResultSet results = pstmt.executeQuery();
+
+            if(results.next()) {
+                user.setUserId(results.getInt("user_id"));
+                user.setUsername(results.getString("username"));
+                user.setEmail(results.getString("email"));
+                user.setPassword(results.getString("password"));
+                user.setDepartment(results.getString("department"));
+                user.setAccountBalance(results.getInt("account_balance"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
     @Override
     public EmployeeUser read(int id) {
         EmployeeUser employeeUser = new EmployeeUser();
