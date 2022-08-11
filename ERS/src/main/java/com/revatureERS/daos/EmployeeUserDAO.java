@@ -3,10 +3,7 @@ package com.revatureERS.daos;
 import com.revatureERS.pojos.EmployeeUser;
 import com.revatureERS.services.DataSourceService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +12,6 @@ public class EmployeeUserDAO implements DatasourceCRUD<EmployeeUser>{
     Connection connection;
 
     public EmployeeUserDAO() {
-        //TODO
         this.connection = DataSourceService.getConnection();
     }
 
@@ -24,7 +20,7 @@ public class EmployeeUserDAO implements DatasourceCRUD<EmployeeUser>{
     public void create(EmployeeUser employeeUser) {
         try {
             String sql = "INSERT INTO EmployeeUsers (user_name, email, password, department, account_balance) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement pstmt = connection.prepareStatement(sql);
+            PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, employeeUser.getUsername());
             pstmt.setString(2, employeeUser.getEmail());
             pstmt.setString(3, employeeUser.getPassword());
@@ -32,6 +28,9 @@ public class EmployeeUserDAO implements DatasourceCRUD<EmployeeUser>{
             pstmt.setInt(5, employeeUser.getAccountBalance());
 
             pstmt.executeUpdate();
+
+            ResultSet keys = pstmt.getGeneratedKeys();
+
 
         } catch (SQLException e) {
             e.printStackTrace();

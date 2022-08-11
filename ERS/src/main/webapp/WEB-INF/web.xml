@@ -34,6 +34,7 @@
     <servlet>
         <servlet-name>EmployeeUserServlet</servlet-name>
         <servlet-class>com.revatureERS.servlets.EmployeeUserServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
@@ -44,6 +45,7 @@
     <servlet>
         <servlet-name>ReimbursementServlet</servlet-name>
         <servlet-class>com.revatureERS.servlets.ReimbursementServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
 
 

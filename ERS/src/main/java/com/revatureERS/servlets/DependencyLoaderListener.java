@@ -8,8 +8,10 @@ import javax.servlet.ServletContextListener;
 public class DependencyLoaderListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+        System.out.println("Initializing Servlet context...");
         DataSourceService.getConnection();
 
+        System.out.println("Servlet context Initialized.");
     }
 
     @Override

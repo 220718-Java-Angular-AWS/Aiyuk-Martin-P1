@@ -14,6 +14,7 @@ public class ReimbursementDAO implements DatasourceCRUD<Reimbursement> {
     Connection connection;
 
     public ReimbursementDAO() {
+
         connection = DataSourceService.getConnection();
     }
 

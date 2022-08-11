@@ -25,6 +25,7 @@ public class DataSourceService {
     }
 
     private static void connect() {
+        System.out.println("initializing DataSource...");
         // Connecting to the database here
         //jdbc:postgresql://hostname:port/databaseName
         try {
@@ -58,6 +59,9 @@ public class DataSourceService {
             Class.forName(driver);
 
             connection = DriverManager.getConnection(builder.toString());
+
+            System.out.println("Datasource Initialized!");
+
 
         } catch(FileNotFoundException e) {
            e.printStackTrace();
