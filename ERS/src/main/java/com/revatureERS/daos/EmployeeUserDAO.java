@@ -25,11 +25,15 @@ public class EmployeeUserDAO implements DatasourceCRUD<EmployeeUser>{
             pstmt.setString(2, employeeUser.getEmail());
             pstmt.setString(3, employeeUser.getPassword());
             pstmt.setString(4, employeeUser.getDepartment());
-            pstmt.setInt(5, employeeUser.getAccountBalance());
+            pstmt.setLong(5, employeeUser.getAccountBalance());
 
             pstmt.executeUpdate();
 
             ResultSet keys = pstmt.getGeneratedKeys();
+            if(keys.next()) {
+                Integer key = keys.getInt("user_id");
+                employeeUser.setUserId(key);
+            }
 
 
         } catch (SQLException e) {
@@ -53,7 +57,7 @@ public class EmployeeUserDAO implements DatasourceCRUD<EmployeeUser>{
                 user.setEmail(results.getString("email"));
                 user.setPassword(results.getString("password"));
                 user.setDepartment(results.getString("department"));
-                user.setAccountBalance(results.getInt("account_balance"));
+                user.setAccountBalance(results.getLong("account_balance"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -75,7 +79,7 @@ public class EmployeeUserDAO implements DatasourceCRUD<EmployeeUser>{
                 employeeUser.setUsername(results.getString("user_name"));
                 employeeUser.setEmail(results.getString("email"));
                 employeeUser.setPassword(results.getString("password"));
-                employeeUser.setAccountBalance(results.getInt("account_balance"));
+                employeeUser.setAccountBalance(results.getLong("account_balance"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -97,7 +101,7 @@ public class EmployeeUserDAO implements DatasourceCRUD<EmployeeUser>{
                 employeeUser.setUsername(results.getString("user_name"));
                 employeeUser.setEmail(results.getString("email"));
                 employeeUser.setPassword(results.getString("password"));
-                employeeUser.setAccountBalance(results.getInt("account_balance"));
+                employeeUser.setAccountBalance(results.getLong("account_balance"));
                 userList.add(employeeUser);
             }
         } catch (SQLException e) {
@@ -115,7 +119,7 @@ public class EmployeeUserDAO implements DatasourceCRUD<EmployeeUser>{
             pstmt.setString(2, employeeUser.getEmail());
             pstmt.setString(3, employeeUser.getPassword());
             pstmt.setString(4, employeeUser.getDepartment());
-            pstmt.setInt(5, employeeUser.getAccountBalance());
+            pstmt.setLong(5, employeeUser.getAccountBalance());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

@@ -1,12 +1,13 @@
 package com.revatureERS.pojos;
 
+import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Reimbursement {
 
     private int reimbursementId;
     private int ticketNumber;
-    private int ticketDate;
+    private String ticketDate;
     private int amount;
     private String reason;
     private String status;
@@ -14,7 +15,7 @@ public class Reimbursement {
     public Reimbursement() {
     }
 
-    public Reimbursement(int reimbursementId, int ticketNumber, int ticketDate, int amount, String reason, String status) {
+    public Reimbursement(int reimbursementId, int ticketNumber, String ticketDate, int amount, String reason, String status) {
         this.reimbursementId = reimbursementId;
         this.ticketNumber = ticketNumber;
         this.ticketDate = ticketDate;
@@ -39,11 +40,11 @@ public class Reimbursement {
         this.ticketNumber = ticketNumber;
     }
 
-    public int getTicketDate() {
+    public String getTicketDate() {
         return ticketDate;
     }
 
-    public void setTicketDate(int ticketDate) {
+    public void setTicketDate(String ticketDate) {
         this.ticketDate = ticketDate;
     }
 

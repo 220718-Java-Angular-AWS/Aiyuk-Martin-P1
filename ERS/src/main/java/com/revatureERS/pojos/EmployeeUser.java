@@ -9,13 +9,13 @@ public class EmployeeUser {
     private String email;
     private String password;
     protected String department;
-    private int AccountBalance;
+    private long AccountBalance;
 
 
     public EmployeeUser() {
     }
 
-    public EmployeeUser(int userId, String username, String email, String password, String department, int accountBalance) {
+    public EmployeeUser(int userId, String username, String email, String password, String department, long accountBalance) {
         this.userId = userId;
         this.username = username;
         this.email = email;
@@ -73,11 +73,11 @@ public class EmployeeUser {
         this.department = department;
     }
 
-    public int getAccountBalance() {
+    public long getAccountBalance() {
         return AccountBalance;
     }
 
-    public void setAccountBalance(int accountBalance) {
+    public void setAccountBalance(long accountBalance) {
         AccountBalance = accountBalance;
     }
 

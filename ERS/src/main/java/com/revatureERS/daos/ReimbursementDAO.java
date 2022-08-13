@@ -24,7 +24,7 @@ public class ReimbursementDAO implements DatasourceCRUD<Reimbursement> {
             String sql = "INSERT INTO Reimbursements (ticket_number, ticket_date, amount, reason, status) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, reimbursement.getTicketNumber());
-            pstmt.setInt(2, reimbursement.getTicketDate());
+            pstmt.setString(2, reimbursement.getTicketDate());
             pstmt.setInt(3, reimbursement.getAmount());
             pstmt.setString(4, reimbursement.getReason());
             pstmt.setString(55, reimbursement.getStatus());
@@ -48,7 +48,7 @@ public class ReimbursementDAO implements DatasourceCRUD<Reimbursement> {
             if (results.next()) {
                 reimbursement.setReimbursementId(results.getInt("reimbursement_id"));
                 reimbursement.setTicketNumber(results.getInt("ticket_number"));
-                reimbursement.setTicketDate(results.getInt("ticket_date"));
+                reimbursement.setTicketDate(results.getString("ticket_date"));
                 reimbursement.setAmount(results.getInt("amount"));
                 reimbursement.setReason(results.getString("reason"));
                 reimbursement.setStatus(results.getString("status"));
@@ -72,7 +72,7 @@ public class ReimbursementDAO implements DatasourceCRUD<Reimbursement> {
                 Reimbursement reimbursement = new Reimbursement();
                 reimbursement.setReimbursementId(results.getInt("reimbursement_id"));
                 reimbursement.setTicketNumber(results.getInt("ticket_number"));
-                reimbursement.setTicketDate(results.getInt("ticket_date"));
+                reimbursement.setTicketDate(results.getString("ticket_date"));
                 reimbursement.setAmount(results.getInt("amount"));
                 reimbursement.setReason(results.getString("reason"));
                 reimbursement.setStatus(results.getString("status"));
@@ -92,7 +92,7 @@ public class ReimbursementDAO implements DatasourceCRUD<Reimbursement> {
             PreparedStatement pstmt = connection.prepareStatement(sql);
 
             pstmt.setInt(1, reimbursement.getTicketNumber());
-            pstmt.setInt(2, reimbursement.getTicketDate());
+            pstmt.setString(2, reimbursement.getTicketDate());
             pstmt.setInt(3, reimbursement.getAmount());
             pstmt.setString(4, reimbursement.getReason());
             pstmt.setString(5, reimbursement.getStatus());

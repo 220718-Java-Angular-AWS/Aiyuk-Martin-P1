@@ -29,18 +29,25 @@ public class EmployeeUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String param = req.getParameter("user-id");
-        if(param == null) {
+        String param = req.getParameter("user_id");
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+        if(param == null && email == null && password == null) {
             //Return all
             List<EmployeeUser> userList = service.getAllEmployeeUsers();
             String json = mapper.writeValueAsString(userList);
             resp.getWriter().println(json);
-        } else {
+        } else if (param != null){
             //return the one the request wants
-            Integer userId = Integer.parseInt(req.getParameter("user-id"));
+            Integer userId = Integer.parseInt(req.getParameter("user_id"));
 
             EmployeeUser user = service.getEmployeeUsers(userId);
             String json = mapper.writeValueAsString(user);
+            resp.getWriter().println(json);
+        }else {
+            // get the user credentials
+            EmployeeUser employeeUser = service.checkEmployeeUser(email, password);
+            String json = mapper.writeValueAsString(employeeUser);
             resp.getWriter().println(json);
         }
 
@@ -65,7 +72,7 @@ public class EmployeeUserServlet extends HttpServlet {
         builder.append(buffer.readLine());
     }
     String json = builder.toString();
-
+        System.out.println("posting");
 
     EmployeeUser newUser = mapper.readValue(json, EmployeeUser.class);
         service.saveEmployeeUser(newUser);
@@ -73,11 +80,36 @@ public class EmployeeUserServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        StringBuilder builder = new StringBuilder();
+        BufferedReader buffer = req.getReader();
+        while (buffer.ready()) {
+            builder.append(buffer.readLine());
+        }
+        String json = builder.toString();
+
+        EmployeeUser newUser = mapper.readValue(json, EmployeeUser.class);
+        service.updateEmployeeUser(newUser);
 
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String param = req.getParameter("user_id");
+
+        if (param == null) {
+            //return all
+            resp.getWriter().println("Unable to delete user as User ID doesn't exist");
+        }else {
+            //return the one the request wants
+            Integer userId = Integer.parseInt(req.getParameter("user_id"));
+
+            service.deleteEmployeeUser(userId);
+
+            resp.getWriter().println("Deleted Successfully");
+        }
+
+        resp.setContentType("Application/Json; Charset=UTF-8");
+        resp.setStatus(200);
 
     }
 }
