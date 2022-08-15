@@ -48,5 +48,33 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <!-- CORS FILTER -->
+    <filter>
+        <filter-name>CorsFilter</filter-name>
+        <filter-class>com.revatureERS.servlets.CORSFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CorsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- /CORS FILTER -->
+
+    <error-page>
+        <exception-type>com.revatureERS.exceptions.AccessDeniedException</exception-type>
+        <location>/errorHandler</location>
+    </error-page>
+
+    <servlet-mapping>
+        <servlet-name>ErrorHandlerServlet</servlet-name>
+        <url-pattern>/errorHandler</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ErrorHandlerServlet</servlet-name>
+        <servlet-class>com.revatureERS.servlets.ErrorHandlerServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
 
 </web-app>

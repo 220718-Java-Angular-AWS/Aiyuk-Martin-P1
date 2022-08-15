@@ -91,7 +91,7 @@ public class EmployeeUserDAO implements DatasourceCRUD<EmployeeUser>{
     public List<EmployeeUser> readAll() {
         List<EmployeeUser> userList = new LinkedList<>();
         try {
-            String sql = "SELECT * FROM EmployeeUsers";
+            String sql = "SELECT * FROM employeeusers";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             ResultSet results = pstmt.executeQuery();
 
