@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ManagerMenu</title>
+    </head>
+    <body>
+        <form onsubmit="return false">
+            <h1>Delete EmployeeUser</h1>
+            <label>Enter Employee ID Number: </label>
+            <input type="number" id="userId" required>
+            <button type="submit" onclick="deleteEmployee()">Submit</button>
+        </form>
+    </body>
+    <script>
+        async function deleteEmployeeUser() {
+            let employeeId = document.getElementById("UserId").value;
+            let url = 'http://localhost8080/ERS/EmployeeUser?user_id=' + userId;
+            let response = await fetch(url, {
+                method: 'DELETE',
+                headers:{
+                    'Content-Type': 'application/json; charset=utf-8'
+                }
+            });
+    
+            if (response.status == 200) {
+                alert("Critical Hit!")
+            }
+        };
+    </script>
+</html>

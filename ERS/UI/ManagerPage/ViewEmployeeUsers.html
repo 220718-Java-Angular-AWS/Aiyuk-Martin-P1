@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>View EmployeeUsers</title>
+    </head>
+    <body>
+        <form onsubmit="return false">
+            <h3>Find EmployeeUser by ID</h3><br>
+            <label>Enter EmployeeUser ID: </label>
+            <input type="number" placeholder="ID#" id="userID" required>
+            <button type="submit" id="myBtn" onclick="viewIndividualEmployeeUser(); clrEmployeeUser()">Find</button>
+            <button type="button" onclick="getEmployeeUser(); clrList()">Find All</button>
+        </form>
+        <br>
+        <div id="individualEmployeeUser"></div>
+        <div id="employeeUserList"></div>
+    </body>
+    <script>
+        
+        async function getEmployeeUser() {
+           
+            let url = 'http://localhost8080/ERS/EmployeeUser';
+            let response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                }
+            });
+                
+                let array = await response.json();
+                let htmlElement = document.getElementById('employeeUserList');
+    
+                for(let i = 0; i < array.length; i++){
+                    let employeeUser = array[i];
+                    htmlElement.innerHTML += "<p>userID#: " + employeeUser.userId + "</p>";
+                    htmlElement.innerHTML += "<p>Username: " + employeeUser.username + "</p>";
+                    htmlElement.innerHTML += "<p>Email: " + employeeUser.email + "</p>";
+                    htmlElement.innerHTML += "<p>Password: " + employee.password + "</p><br>";
+                }
+        };
+        
+        async function viewIndividualEmployee() {
+            
+            let userId = document.getElementById("userId").value;
+            let url = 'http://localhost8080/ERS/EmployeeUser?user_id=' + userId;
+            let response = await fetch(url, {
+                method: 'GET',
+                headers:{
+                    'Content-Type': 'application/json; charset=utf-8'
+                }
+            });
+            
+            let employeeUser = await response.json()
+            let htmlElement = document.getElementById("individualEmployeeUser");
+            
+            if(employee.firstName != null){
+                htmlElement.innerHTML += "<p>userID#: " + employeeUser.userId + "</p>";
+                htmlElement.innerHTML += "<p>Username: " + employeeUser.username + "</p>";
+                htmlElement.innerHTML += "<p>Email: " + employeeUser.email + "</p>";
+                htmlElement.innerHTML += "<p>Password: " + employee.password + "</p><br>";
+            }else{
+                alert("EmployeeUser does not exist!")
+            }
+            
+            
+        }
+    
+        async function clrList() {
+            let list = document.getElementById("employeeUserList");
+            list.innerHTML = "";
+        }
+        
+        async function clrEmployee(){
+            let employeeUser = document.getElementById("individualEmployeeUser");
+            employeeUser.innerHTML = "";
+    
+        }
+    </script>
+</html>

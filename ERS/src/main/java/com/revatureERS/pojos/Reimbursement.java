@@ -11,17 +11,19 @@ public class Reimbursement {
     private int amount;
     private String reason;
     private String status;
+    private int userID;
 
     public Reimbursement() {
     }
 
-    public Reimbursement(int reimbursementId, int ticketNumber, String ticketDate, int amount, String reason, String status) {
+    public Reimbursement(int reimbursementId, int ticketNumber, String ticketDate, int amount, String reason, String status, int userID) {
         this.reimbursementId = reimbursementId;
         this.ticketNumber = ticketNumber;
         this.ticketDate = ticketDate;
         this.amount = amount;
         this.reason = reason;
         this.status = status;
+        this.userID = userID;
     }
 
     public int getReimbursementId() {
@@ -72,28 +74,34 @@ public class Reimbursement {
         this.status = status;
     }
 
+    public void setUserID(int userID) { this.userID = userID; }
+
+    public int getUserID() { return userID; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Reimbursement that = (Reimbursement) o;
-        return reimbursementId == that.reimbursementId && ticketNumber == that.ticketNumber && ticketDate == that.ticketDate && amount == that.amount && Objects.equals(reason, that.reason) && Objects.equals(status, that.status);
+        return reimbursementId == that.reimbursementId && ticketNumber == that.ticketNumber && ticketDate == that.ticketDate && amount == that.amount && Objects.equals(reason, that.reason) && Objects.equals(status, that.status) && Objects.equals(userID, that.userID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(reimbursementId, ticketNumber, ticketDate, amount, reason, status);
+        return Objects.hash(reimbursementId, ticketNumber, ticketDate, amount, reason, status, userID);
     }
 
     @Override
-    public String  toString() {
+    public String toString() {
         return "Reimbursement{" +
-                "userId=" + reimbursementId  +
+                "reimbursementId=" + reimbursementId +
                 ", ticketNumber=" + ticketNumber +
-                ", ticketDate=" + ticketDate +
+                ", ticketDate='" + ticketDate + '\'' +
                 ", amount=" + amount +
                 ", reason='" + reason + '\'' +
                 ", status='" + status + '\'' +
+                ", userID=" + userID +
                 '}';
     }
 }
+

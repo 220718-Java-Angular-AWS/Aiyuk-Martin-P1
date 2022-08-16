@@ -22,12 +22,13 @@ public class ReimbursementDAO implements DatasourceCRUD<Reimbursement> {
     @Override
     public Accounts create(Reimbursement reimbursement) {
         try {
-            String sql = "INSERT INTO Reimbursements (ticket_number, ticket_date, amount, reason) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO Reimbursements (ticket_number, ticket_date, amount, reason, userID) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, reimbursement.getTicketNumber());
             pstmt.setString(2, reimbursement.getTicketDate());
             pstmt.setInt(3, reimbursement.getAmount());
             pstmt.setString(4, reimbursement.getReason());
+            pstmt.setInt(5, reimbursement.getUserID());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -53,6 +54,7 @@ public class ReimbursementDAO implements DatasourceCRUD<Reimbursement> {
                 reimbursement.setAmount(results.getInt("amount"));
                 reimbursement.setReason(results.getString("reason"));
                 reimbursement.setStatus(results.getString("status"));
+                reimbursement.setUserID(results.getInt("userID"));
 
             }
         } catch (SQLException e) {
@@ -77,6 +79,7 @@ public class ReimbursementDAO implements DatasourceCRUD<Reimbursement> {
                 reimbursement.setAmount(results.getInt("amount"));
                 reimbursement.setReason(results.getString("reason"));
                 reimbursement.setStatus(results.getString("status"));
+                reimbursement.setUserID(results.getInt("userID"));
                 reimbursementList.add(reimbursement);
 
             }

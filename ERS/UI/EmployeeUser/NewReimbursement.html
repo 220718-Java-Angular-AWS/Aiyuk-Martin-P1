@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <form onsubmit="return false">
+            <h1>New Reimbursement</h1>
+            <label>Ticket Number</label>
+            <br>
+            <input type="text" id="title" style="width: 500px;" required>
+            <br><br><br>
+            <label>Ticket Date</label>
+            <br>
+            <input type="text" id="title" style="width: 500px;" required>
+            <br><br><br>
+            <label>UserID</label>
+            <input type="number" id="userId" required>
+            <br><br>
+            <label>Amount</label>
+            <input type="number" id="amount" min="0" maxlength="100000" step=".01">
+            <br><br>
+            <label>Reason</label>
+            <br>
+            <textarea type="text" rows="6" cols="100" id="message" required></textarea>
+            <br>
+            <button type="submit" id="btn" onclick="newReimbursement()">Submit</button>
+        </form>
+        <button type="button" onclick="returnMainMenu()">Back</button>
+    </body>
+    <script>
+        async function newReimbursement(){
+            let request = {
+                ticket_number: document.getElementById("title").value,
+                ticket_date: document.getElementById("title").value,
+                Amount: document.getElementById("amount").value,
+                message: document.getElementById("message").value,
+                userId: document.getElementById("userId").value
+            }
+    
+            if(request.ticket_number.length == 0) {
+                alert("Field \"Ticket Number\" cannot be empty");
+                throw "Field cannot be empty!"
+            }
+            if(request.ticket_date.length == 0) {
+                alert("Field \"Ticket Number\" cannot be empty");
+                throw "Field cannot be empty!"
+            }
+            if(request.userId.length == 0) {
+                alert("Field \"UserID\" cannot be empty");
+                throw "Field cannot be empty!"
+            }
+            if(request.Amount.length == 0) {
+                alert("Field \"Amount\" cannot be empty");
+                throw "Field cannot be empty!"
+            }
+            if(request.reason.length == 0) {
+                alert("Field \"Message\" cannot be empty");
+                throw "Field cannot be empty!"
+            }
+            let url = 'http://localhost8080/ERS/Reimbursement';
+            let response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                },
+                body: JSON.stringify(request)
+            });
+            if(response.status == 200){
+                alert("Reimbursement Added");
+                location.href = 'file:///C:\Users\AirTino\Documents\Aiyuk-Martin-P1\ERS\UI\EmployeeUser/mainMenu.html';
+            }
+            console.log("got to here")
+        }
+    
+        async function returnMainMenu() {
+            location.href = 'file:///C:\Users\AirTino\Documents\Aiyuk-Martin-P1\ERS\UI\EmployeeUser/mainMenu.html'
+        }
+    </script>
+</html>
