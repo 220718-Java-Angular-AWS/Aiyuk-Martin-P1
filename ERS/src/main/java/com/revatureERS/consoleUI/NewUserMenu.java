@@ -30,10 +30,8 @@ public class NewUserMenu extends View {
         String email = scan.nextLine();
         System.out.print("Enter Password: ");
         String password = scan.nextLine();
-        System.out.print("Enter Department: ");
-        String department = scan.nextLine();
 
-        EmployeeUser newEmployeeUser = new EmployeeUser(username, email, password, department);
+        EmployeeUser newEmployeeUser = new EmployeeUser(username, email, password);
 
         service.saveEmployeeUser(newEmployeeUser);
 

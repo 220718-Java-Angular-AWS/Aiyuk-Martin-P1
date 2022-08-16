@@ -1,5 +1,6 @@
 package com.revatureERS.daos;
 
+import com.revatureERS.pojos.Accounts;
 import com.revatureERS.pojos.EmployeeUser;
 import com.revatureERS.services.DataSourceService;
 
@@ -17,15 +18,13 @@ public class EmployeeUserDAO implements DatasourceCRUD<EmployeeUser>{
 
 
     @Override
-    public void create(EmployeeUser employeeUser) {
+    public Accounts create(EmployeeUser employeeUser) {
         try {
-            String sql = "INSERT INTO EmployeeUsers (user_name, email, password, department, account_balance) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO EmployeeUsers (user_name, email, password) VALUES (?, ?, ?)";
             PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, employeeUser.getUsername());
             pstmt.setString(2, employeeUser.getEmail());
             pstmt.setString(3, employeeUser.getPassword());
-            pstmt.setString(4, employeeUser.getDepartment());
-            pstmt.setLong(5, employeeUser.getAccountBalance());
 
             pstmt.executeUpdate();
 
@@ -35,11 +34,11 @@ public class EmployeeUserDAO implements DatasourceCRUD<EmployeeUser>{
                 employeeUser.setUserId(key);
             }
 
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+        return null;
     }
 
     public EmployeeUser logIn(String email, String password) {
@@ -56,8 +55,6 @@ public class EmployeeUserDAO implements DatasourceCRUD<EmployeeUser>{
                 user.setUsername(results.getString("username"));
                 user.setEmail(results.getString("email"));
                 user.setPassword(results.getString("password"));
-                user.setDepartment(results.getString("department"));
-                user.setAccountBalance(results.getLong("account_balance"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -79,7 +76,6 @@ public class EmployeeUserDAO implements DatasourceCRUD<EmployeeUser>{
                 employeeUser.setUsername(results.getString("user_name"));
                 employeeUser.setEmail(results.getString("email"));
                 employeeUser.setPassword(results.getString("password"));
-                employeeUser.setAccountBalance(results.getLong("account_balance"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -101,7 +97,6 @@ public class EmployeeUserDAO implements DatasourceCRUD<EmployeeUser>{
                 employeeUser.setUsername(results.getString("user_name"));
                 employeeUser.setEmail(results.getString("email"));
                 employeeUser.setPassword(results.getString("password"));
-                employeeUser.setAccountBalance(results.getLong("account_balance"));
                 userList.add(employeeUser);
             }
         } catch (SQLException e) {
@@ -113,13 +108,11 @@ public class EmployeeUserDAO implements DatasourceCRUD<EmployeeUser>{
     @Override
     public void update(EmployeeUser employeeUser) {
         try {
-            String sql = "UPDATE EmployeeUsers SET user_name = ?, email = ?, password = ?, department = ?, account_balance = ?, WHERE user_id = ?";
+            String sql = "UPDATE EmployeeUsers SET user_name = ?, email = ?, password = ?, WHERE user_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, employeeUser.getUsername());
             pstmt.setString(2, employeeUser.getEmail());
             pstmt.setString(3, employeeUser.getPassword());
-            pstmt.setString(4, employeeUser.getDepartment());
-            pstmt.setLong(5, employeeUser.getAccountBalance());
             pstmt.executeUpdate();
 
         } catch (SQLException e) {

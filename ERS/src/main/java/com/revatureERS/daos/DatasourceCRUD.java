@@ -1,11 +1,13 @@
 package com.revatureERS.daos;
 
+import com.revatureERS.pojos.Accounts;
+
 import java.util.List;
 
 public interface DatasourceCRUD<T> {
     //CRUD - Create, Read, Update, Delete
 
-    void create(T t);
+    Accounts create(T t);
 
     T read(int id);
 

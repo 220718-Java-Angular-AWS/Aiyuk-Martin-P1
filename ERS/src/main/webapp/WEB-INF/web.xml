@@ -48,6 +48,17 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <servlet-mapping>
+        <servlet-name>AccountsServlet</servlet-name>
+        <url-pattern>/Accounts</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AccountsServlet</servlet-name>
+        <servlet-class>com.revatureERS.servlets.AccountsServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
     <!-- CORS FILTER -->
     <filter>
         <filter-name>CorsFilter</filter-name>
