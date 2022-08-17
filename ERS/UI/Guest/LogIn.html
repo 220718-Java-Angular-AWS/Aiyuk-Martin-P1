@@ -4,26 +4,26 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Log In</title>
+        <title>Reimbursement Page</title>
     </head>
     <body>
-        <form onsubmit = "return false">
-            <h1>Log In</h1>
+        <h1>Welcome, Please Log in to continue</h1>
+            <h2>Log In</h2>
                 <label>Enter Username: </label>
                 <input type="text" placeholder="Enter Username" id="credentials" required>
                 <br><br>
                 <label>Enter Password: </label>
                 <input type="password" placeholder="Enter Password" id="password" required>
                 <br><br>
-                <button type="submit" id="login" onclick="logInEmployee()">Log In</button>
-                <button type="submit" onclick="registerEmployee()">Register New Employee</button>
-        </form>    
+                <button type="submit" id="login" onclick="logInEmployeeUser()">Log In</button>
+                <button type="submit" onclick="registerEmployeeUser()">Register New EmployeeUser</button>
+           
     </body>
     <script>
         async function logInEmployee() {
-            creds = document.getElementById("credentials").value;
+            emial = document.getElementById("email").value;
             password = document.getElementById("password").value;
-            let url = 'http://localhost:8080/Jared-Adams-P1/login?credentials=' + creds + '&password=' + password;
+            let url = 'http://localhost:8080/ERS/reimbursement?user_id=' + email + '& password=' + password;
             let response = await fetch(url, {
                 method: 'GET',
                 headers:{
@@ -35,21 +35,21 @@
                 let employee = await response.json();
                 if(localStorage.getItem == null){
                     document.getElementById("login").addEventListener("click", function() {
-                    window.localStorage.setItem('userId', employee.employeeId);
-                    localStorage.setItem('admin', employee.admin);
+                    window.localStorage.setItem('userId', employeeuser.userId);
+                    localStorage.setItem('admin', employeeuser.manager);
                 });
                 }else{
                     localStorage.getItem('userId');
-                    localStorage.getItem('admin');
-                    localStorage.setItem('userId', employee.employeeId);
-                    localStorage.setItem('admin', employee.admin);
+                    localStorage.getItem('manager');
+                    localStorage.setItem('userId', employeeuser.userId);
+                    localStorage.setItem('manager', employeeuser.manager);
                 }
                 
                 alert("Welcome " + employee.firstName + " " + employee.lastName);
                 if(employee.admin == true){
-                    location.href = "file:///C:/Revature/Jared-Adams-P1/UI/Admin/adminMenu.html";
+                    location.href = 'file:///C:\Users\AirTino\Documents\Aiyuk-Martin-P1\ERS\UI\EmployeeUser/mainMenu.html';
                 }else{
-                    location.href = "file:///C:/Revature/Jared-Adams-P1/UI/Employee/mainMenu.html";
+                    location.href = 'file:///C:\Users\AirTino\Documents\Aiyuk-Martin-P1\ERS\UI\EmployeeUser/mainMenu.html';
                 }
                 
             }
@@ -58,7 +58,7 @@
         }
         
         async function registerEmployee() {
-            location.href = "file:///C:/Revature/Jared-Adams-P1/UI/Guest/newUserForm.html"
+            location.href = 'file:///C:\Users\AirTino\Documents\Aiyuk-Martin-P1\ERS\UI\EmployeeUser/mainMenu.html';
         }
 </script>        
 </html>

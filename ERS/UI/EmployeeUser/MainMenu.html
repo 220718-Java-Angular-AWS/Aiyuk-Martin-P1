@@ -4,21 +4,143 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>User Menu</title>
 </head>
 <body>
     <h1>Employee Menu</h1>
+    <h2>Welcome, Please select an option below</h2>
     <button type="button" onclick="newReimbursement()">New Reimbursement</button><br><br>
     <button type="button" onclick="viewReimbursement()">View Reimbursements</button><br><br>
+    <button type="button" onclick="logIn()">Edit Profile</button> 
+    <button type="button" onclick="showRequests()">View Requests</button><br><br>
+    <input type="text"type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="EditID" placeholder="ReimbursementID Here" value="0"> <button type="button" onclick="editReq()" >Edit Request</button>
+    <br><input type="text"type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="DeleteID" placeholder="ReimbursementID Here" value="0"> <button type="button" onclick="deleteIt()" >Delete Request</button><br>
+    <div id="requestList"></div>
    
 </body>
 <script>
-    async function newReimbursement() {
-        location.href = "file:///C:\Users\AirTino\Documents\Aiyuk-Martin-P1\ERS\UI\EmployeeUser/newReimbursement.html"
-    }
-    async function viewReimbursements() {
-        location.href = "file:///C:\Users\AirTino\Documents\Aiyuk-Martin-P1\ERS\UI\EmployeeUser/viewReimbursements.html"
-    }
+    // async function newReimbursement() {
+    //     location.href = "file:///C:\Users\AirTino\Documents\Aiyuk-Martin-P1\ERS\UI\EmployeeUser/newReimbursement.html"
+    // }
+    // async function viewReimbursements() {
+    //     location.href = "file:///C:\Users\AirTino\Documents\Aiyuk-Martin-P1\ERS\UI\EmployeeUser/viewReimbursements.html"
+    // }
+    (async function newReimbursement(){location.href='newReimbursement.html'}
+    
+    (async function showReimbursements() {
+        let url = 'http://localhost:8080/ERS/reimbursement?user_id='+window.sessionStorage.getItem('userID')
+    
+    let response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        });
+        let array = await response.json();
+        let htmlElement = document.getElementById('reimbursementList');
+//get the element where we will place our content
+htmlElement.innerHTML = ' '
+
+//This is just looping through an array, exactly the same as Java
+for (let i = 0; i < array.length; i++) {
+    let req = array[i];
+
+
+    //insert into the web page the data
+    htmlElement.innerHTML += "<p>Reimbursement ID: " + reimbursement.reimbursementId + "</p>";
+    htmlElement.innerHTML += "<p>Ticket Number: " + reimbursement.ticket_number + "</p>";
+    htmlElement.innerHTML += "<p>Ticket Date: " + reimbursement.ticket_date + "</p>";
+    htmlElement.innerHTML += "<p>User ID: " + reimbursement.userID + "</p>";
+    htmlElement.innerHTML += "<p>Amount: " + reimbursement.Amount + "</p>";
+    htmlElement.innerHTML += "<p>Reason: " + reimbursement.reason + "</p>";
+    htmlElement.innerHTML += "<p>Status: " + reimbursement.status + "</p><br>";
+ 
+
+}
+    
+})();
+async function deleteIt(){
+
+    
+    let url =  'http://localhost:8080/ERS/reimbursement?user_id=' + document.getElementById('DeleteID').value
+
+    let response = await fetch(url,{
+        method: 'GET',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+    });
+    if(response.approved == "Approved"){
+        alert("Check your balance")
+    }else{ 
+
+
+    
+let url ='http://localhost:8080/ERS/reimbursement?user_id=' + document.getElementById('DeleteID').value
+let response = await fetch(url, {
+    method: 'DELETE',
+    headers:{'Content-Type': 'application/json;charset=utf-8'},
+})
+if(response.status == 200){
+    alert("Reimbursement deleted");
+    location.href = 'mainMenu.html'
+}else{
+}
+}
+
+async function editReq(){
+    let editID = document.getElementById('EditID').value
+    let url =  'http://localhost:8080/ERS/reimbursement?user_id=' + editID
+
+    let response = await fetch(url,{
+        method: 'GET',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+    });
+let request= await response.json();
+
+window.sessionStorage.setItem('uID', reimbursement.userId)
+window.sessionStorage.setItem('app', reimbursement.approved)
+let theLink = "location.href=NewReimbursement.html"
+let htmlElement = document.getElementById('reimbursementList');
+htmlElement.innerHTML = ' '
+
+    htmlElement.innerHTML += "<h4>ReimbursementID: "+ reimbursement.reimbursementId + "</h4>"
+    htmlElement.innerHTML += "<h4>Ticket_number: <input type='text' id = 'ticket_number' value = '" + reimbursement.ticket_number + "'></h4>"
+    htmlElement.innerHTML += "<h4>Ticket_date: <input type='text' id = 'ticket_date' value = '" + reimbursement.ticket_date + "'></h4>"
+    htmlElement.innerHTML += "<p>Amount: $<input type='number' id = 'amount' value = '"+reimbursement.amount+"'> </p>"
+    htmlElement.innerHTML += "<h4>Reason: <textarea type='text' rows='6' cols='100' id = 'reason' > " + reimbursement.reason + "</textarea></h4>"
+    htmlElement.innerHTML += "<p>Status: "+ reimbursement.approved+"</p>"
+
+}
+async function updateReimbursement(){
+
+let updateReimbursement= {
+    reimbursementId: document.getElementById('EditID').value,
+    userId: sessionStorage.getItem('userID'),
+    ticket_number: document.getElementById('ticket_number').value,
+    ticket_date: document.getElementById('ticket_date').value,
+    amount:  document.getElementById('amount').value,
+    reason:  document.getElementById('reason').value,
+    status: sessionStorage.getItem('status')
+}
+console.log(upRequest)
+    let url =  'http://localhost:8080/ERS/reimbursement?user_id='
+
+    let response = await fetch(url,{
+        method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(upRequest)
+    });
+
+   if(response.status == 200){
+    location.href = 'mainMenu.html'
+   }
+
+}
 
 </script>
 </html>

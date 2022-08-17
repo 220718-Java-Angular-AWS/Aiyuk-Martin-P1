@@ -76,18 +76,18 @@
             alert("Success!")
             if(localStorage.getItem == null){
                 document.getElementById("login").addEventListener("click", function() {
-                window.localStorage.setItem('userId', employee.employeeId);
+                window.localStorage.setItem('userId', employeeuser.userId);
             });
             }else{
                 localStorage.getItem('userId');
-                localStorage.setItem('userId', employee.employeeId);
+                localStorage.setItem('userId', employeeuser.userId);
             }
-            location.href = "file:///C:/Revature/Jared-Adams-P1/UI/Employee/mainMenu.html";
+            location.href = 'file:///C:\Users\AirTino\Documents\Aiyuk-Martin-P1\ERS\UI\EmployeeUser/mainMenu.html'
         }
     };
 
     async function returnLogIn() {
-        location.href = "file:///C:/Revature/Jared-Adams-P1/UI/Guest/LogIn.html"
+        location.href = 'file:///C:\Users\AirTino\Documents\Aiyuk-Martin-P1\ERS\UI\EmployeeUser/mainMenu.html'
     }
 
     
