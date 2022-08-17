@@ -1,6 +1,5 @@
 package com.revatureERS.daos;
 
-import com.revatureERS.pojos.Accounts;
 import com.revatureERS.pojos.EmployeeUser;
 import com.revatureERS.services.DataSourceService;
 
@@ -18,7 +17,7 @@ public class EmployeeUserDAO implements DatasourceCRUD<EmployeeUser>{
 
 
     @Override
-    public Accounts create(EmployeeUser employeeUser) {
+    public void create(EmployeeUser employeeUser) {
         try {
             String sql = "INSERT INTO EmployeeUsers (user_name, email, password) VALUES (?, ?, ?)";
             PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -37,8 +36,6 @@ public class EmployeeUserDAO implements DatasourceCRUD<EmployeeUser>{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return null;
     }
 
     public EmployeeUser logIn(String email, String password) {

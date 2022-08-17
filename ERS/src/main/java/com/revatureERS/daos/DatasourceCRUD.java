@@ -7,7 +7,7 @@ import java.util.List;
 public interface DatasourceCRUD<T> {
     //CRUD - Create, Read, Update, Delete
 
-    Accounts create(T t);
+    void create(T t);
 
     T read(int id);
 

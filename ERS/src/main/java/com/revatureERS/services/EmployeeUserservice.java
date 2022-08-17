@@ -37,4 +37,7 @@ public class EmployeeUserservice {
     }
 
 
+    public EmployeeUser authenticate(String email, String password) {
+        return dao.logIn(email, password);
+    }
 }

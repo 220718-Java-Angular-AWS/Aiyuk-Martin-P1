@@ -1,6 +1,5 @@
 package com.revatureERS.daos;
 
-import com.revatureERS.pojos.Accounts;
 import com.revatureERS.pojos.Reimbursement;
 import com.revatureERS.services.DataSourceService;
 
@@ -15,12 +14,15 @@ public class ReimbursementDAO implements DatasourceCRUD<Reimbursement> {
     Connection connection;
 
     public ReimbursementDAO() {
-
         connection = DataSourceService.getConnection();
     }
 
+    public ReimbursementDAO(Connection connection) {
+        this.connection = connection;
+    }
+
     @Override
-    public Accounts create(Reimbursement reimbursement) {
+    public void create(Reimbursement reimbursement) {
         try {
             String sql = "INSERT INTO Reimbursements (ticket_number, ticket_date, amount, reason, userID) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement pstmt = connection.prepareStatement(sql);
@@ -34,7 +36,6 @@ public class ReimbursementDAO implements DatasourceCRUD<Reimbursement> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
     }
 
     @Override

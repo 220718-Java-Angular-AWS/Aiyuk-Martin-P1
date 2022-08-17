@@ -16,7 +16,7 @@ public class AccountsDAO implements DatasourceCRUD<Accounts> {
     }
 
     @Override
-    public Accounts create(Accounts accounts) {
+    public void create(Accounts accounts) {
         try {
             String sql = "INSERT INTO Accounts (account_balance, department) VALUES (?, ?)";
             PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -29,7 +29,6 @@ public class AccountsDAO implements DatasourceCRUD<Accounts> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return accounts;
     }
 
 
