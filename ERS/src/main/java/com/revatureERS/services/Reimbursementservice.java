@@ -24,6 +24,9 @@ public class Reimbursementservice {
     public List<Reimbursement> getAllReimbursement() {
         return dao.readAll();
     }
+    public List<Reimbursement> getAllForUser(Integer employeeUsers) {
+        return dao.employeeUserOnly(employeeUsers);
+    }
 
     public void updateReimbursement(Reimbursement reimbursement) {
         dao.update(reimbursement);

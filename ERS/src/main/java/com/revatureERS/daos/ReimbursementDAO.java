@@ -24,7 +24,7 @@ public class ReimbursementDAO implements DatasourceCRUD<Reimbursement> {
     @Override
     public void create(Reimbursement reimbursement) {
         try {
-            String sql = "INSERT INTO Reimbursements (ticket_number, ticket_date, amount, reason, userID) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Reimbursements (ticket_number, ticket_date, amount, reason, user_id) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, reimbursement.getTicketNumber());
             pstmt.setString(2, reimbursement.getTicketDate());
@@ -55,7 +55,7 @@ public class ReimbursementDAO implements DatasourceCRUD<Reimbursement> {
                 reimbursement.setAmount(results.getInt("amount"));
                 reimbursement.setReason(results.getString("reason"));
                 reimbursement.setStatus(results.getString("status"));
-                reimbursement.setUserID(results.getInt("userID"));
+                reimbursement.setUserID(results.getInt("user_id"));
 
             }
         } catch (SQLException e) {
@@ -68,7 +68,7 @@ public class ReimbursementDAO implements DatasourceCRUD<Reimbursement> {
     public List<Reimbursement> readAll() {
         List<Reimbursement> reimbursementList = new LinkedList<>();
         try {
-            String sql = "SELECT * FROM reimbursements";
+            String sql = "SELECT * FROM Reimbursements";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             ResultSet results = pstmt.executeQuery();
 
@@ -80,7 +80,7 @@ public class ReimbursementDAO implements DatasourceCRUD<Reimbursement> {
                 reimbursement.setAmount(results.getInt("amount"));
                 reimbursement.setReason(results.getString("reason"));
                 reimbursement.setStatus(results.getString("status"));
-                reimbursement.setUserID(results.getInt("userID"));
+                reimbursement.setUserID(results.getInt("user_id"));
                 reimbursementList.add(reimbursement);
 
             }
@@ -123,5 +123,30 @@ public class ReimbursementDAO implements DatasourceCRUD<Reimbursement> {
             e.printStackTrace();
         }
 
+    }
+
+    public List<Reimbursement> employeeUserOnly(Integer employeeUsers) {
+        List<Reimbursement> reimbursementList = new LinkedList<>();
+        try {
+            String sql = "SELECT * FROM Reimbursements WHERE user_id = ?";
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setInt(1, employeeUsers);
+            ResultSet results = pstmt.executeQuery();
+
+            while (results.next()) {
+                Reimbursement reimbursement = new Reimbursement();
+                reimbursement.setReimbursementId(results.getInt("reimbursement_id"));
+                reimbursement.setTicketNumber(results.getInt("ticket_number"));
+                reimbursement.setTicketDate(results.getString("ticket_date"));
+                reimbursement.setAmount(results.getInt("amount"));
+                reimbursement.setReason(results.getString("reason"));
+                reimbursement.setStatus(results.getString("status"));
+                reimbursement.setUserID(results.getInt("user_id"));
+                reimbursementList.add(reimbursement);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reimbursementList;
     }
 }

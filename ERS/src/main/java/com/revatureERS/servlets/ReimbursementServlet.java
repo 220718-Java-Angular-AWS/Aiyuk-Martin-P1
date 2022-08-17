@@ -32,18 +32,25 @@ public class ReimbursementServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String param = req.getParameter("reimbursement_id");
+        String employeeUsers = req.getParameter("user_id");
 
-        if (param == null) {
+        if (param == null && employeeUsers == null) {
             //return all
-            List<Reimbursement> userList = service.getAllReimbursement();
-            String json = mapper.writeValueAsString(userList);
+            List<Reimbursement> reimbursementList = service.getAllReimbursement();
+            String json = mapper.writeValueAsString(reimbursementList);
             resp.getWriter().println(json);
-        }else {
+        }else if(param != null){
             //return the one the request wants
             Integer reimbursementId = Integer.parseInt(req.getParameter("reimbursement_id"));
 
             Reimbursement reimbursement = service.getReimbursement(reimbursementId);
             String json = mapper.writeValueAsString(reimbursement);
+            resp.getWriter().println(json);
+        } else {
+            Integer employeeUserId = Integer.parseInt(req.getParameter("user_id"));
+
+            List<Reimbursement> ListReimbursement = service.getAllForUser(employeeUserId);
+            String json = mapper.writeValueAsString(ListReimbursement);
             resp.getWriter().println(json);
         }
 
@@ -63,6 +70,7 @@ public class ReimbursementServlet extends HttpServlet {
 
         Reimbursement newReimbursement= mapper.readValue(json, Reimbursement.class);
         service.saveReimbursement(newReimbursement);
+        resp.setStatus(200);
 
     }
 
