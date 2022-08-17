@@ -2,6 +2,7 @@ package com.revatureERS.pojos;
 
 import java.sql.Timestamp;
 import java.util.Objects;
+//work with the date/time data types found in the java.time, including LocalDate, LocalTime, LocalDateTime, ZonedDateTime, Period.
 
 public class Reimbursement {
 

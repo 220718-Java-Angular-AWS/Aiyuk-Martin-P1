@@ -9,12 +9,6 @@
 <body>
     <form onsubmit = "return false">
         <h1>New User</h1>
-            <!-- <label>First Name: </label>
-            <input type="text" placeholder="Enter First Name" id="firstName" required>
-            <br><br>
-            <label>Last Name: </label>
-            <input type="text" placeholder="Enter Last Name" id="lastName" required>
-            <br><br> -->
             <label>Username: </label>
             <input type="text" placeholder="Enter Username" id="username" required>
             <br><br>
@@ -32,9 +26,7 @@
 <script>
     //Make an API call for Employees
     async function postEmployee() {
-        let employee = {
-            firstName: document.getElementById("firstName").value,
-            lastName: document.getElementById("lastName").value,
+        let employeeuser = {
             email: document.getElementById("email").value,
             username: document.getElementById("username").value,
             password: document.getElementById("password").value
